@@ -1,0 +1,7 @@
+{
+  "name": "mobile-trabalho",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
