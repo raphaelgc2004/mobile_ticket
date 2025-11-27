@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Retirar Senha</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="ion-text-center">
+    <h1>Bem-vindo!</h1>
+    <p>Selecione o tipo de atendimento:</p>
+  </div>
+
+  <ion-button (click)="solicitarSenha('SP')" expand="block" color="danger" size="large" class="ion-margin-bottom">
+    Prioritário (SP)
+  </ion-button>
+
+  <ion-button (click)="solicitarSenha('SE')" expand="block" color="success" size="large" class="ion-margin-bottom">
+    Exames (SE)
+  </ion-button>
+
+  <ion-button (click)="solicitarSenha('SG')" expand="block" color="tertiary" size="large">
+    Geral (SG)
+  </ion-button>
+</ion-content>

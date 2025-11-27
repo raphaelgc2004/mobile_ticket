@@ -1,0 +1,20 @@
+<div class="ion-text-center ion-padding" style="margin-top: 20px;">
+  <ion-text color="medium"><h2>Última Chamada</h2></ion-text>
+  
+  <h1 style="font-size: 4rem; font-weight: bold; color: var(--ion-color-primary)">
+    {{ ticketService.ultimosChamados.length > 0 ? ticketService.ultimosChamados[0].id : '---' }}
+  </h1>
+</div>
+
+<ion-list-header><ion-label>Histórico</ion-label></ion-list-header>
+
+<ion-list lines="full">
+  <ion-item *ngFor="let ticket of ticketService.ultimosChamados">
+    <ion-icon name="checkmark-circle" slot="start" color="success"></ion-icon>
+    <ion-label>
+      <h2>{{ ticket.id }}</h2>
+      <p>{{ ticket.tipo === 'SP' ? 'Prioritário' : (ticket.tipo === 'SE' ? 'Exame' : 'Geral') }}</p>
+    </ion-label>
+    <ion-badge slot="end" color="medium">{{ ticket.status }}</ion-badge>
+  </ion-item>
+</ion-list>
