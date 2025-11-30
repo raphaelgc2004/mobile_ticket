@@ -9,7 +9,7 @@ import { RouterLink } from '@angular/router';   // <--- O SEGREDO ESTÁ AQUI
   styleUrls: ['home.page.scss'],
   standalone: true,
   // Aqui embaixo nós listamos tudo que o HTML pode usar
-  imports: [IonicModule, CommonModule, RouterLink], 
+  imports: [IonicModule, CommonModule, RouterLink],
 })
 export class HomePage {
   constructor() {}
