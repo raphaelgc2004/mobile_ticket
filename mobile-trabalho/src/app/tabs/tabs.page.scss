@@ -1,0 +1,21 @@
+/* A Barra inteira */
+ion-tab-bar {
+  --background: #ffffff; /* Fundo Branco */
+  border-top: 1px solid #f0f0f0; /* Uma borda cinza bem fininha para separar da tela */
+  height: 60px; /* Um pouco mais alta para ficar elegante */
+  padding-bottom: 5px;
+}
+
+/* Os botões quando NÃO estão selecionados */
+ion-tab-button {
+  --color: #999999; /* Cinza claro (discreto) */
+}
+
+/* O botão que ESTÁ selecionado (A Mágica acontece aqui) */
+ion-tab-button[aria-selected="true"] {
+  --color: #FBC02D; 
+  
+  /* Opcional: Se quiser que o ícone fique um pouco maior quando selecionado */
+  transform: scale(1.1); 
+  transition: 0.2s;
+}

@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="tertiary">
+  <ion-toolbar>
     <ion-title>Módulo Atendente</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -12,29 +12,27 @@
     </ion-card-header>
 
     <ion-card-content>
-      <h1 style="font-size: 3.5rem; font-weight: bold; color: var(--ion-color-dark)">
+      <h1>
         {{ senhaAtual?.id || '---' }}
       </h1>
 
-      <ion-badge *ngIf="senhaAtual"
-                 [color]="senhaAtual?.tipo === 'SP' ? 'danger' : 'primary'"
-                 style="font-size: 1.2rem; padding: 10px;">
+      <ion-badge *ngIf="senhaAtual">
         {{ senhaAtual?.tipo === 'SP' ? 'PRIORIDADE' : 'NORMAL' }}
       </ion-badge>
     </ion-card-content>
   </ion-card>
 
   <div class="ion-padding-top">
-    <ion-button (click)="chamarProximo()" expand="block" size="large" color="primary">
+    <ion-button (click)="chamarProximo()">
       <ion-icon name="megaphone-outline" slot="start"></ion-icon>
       CHAMAR PRÓXIMO
     </ion-button>
   </div>
 
-  <div class="ion-text-center ion-margin-top" style="color: gray;">
+  <div class="ion-text-center ion-margin-top">
     <p>
       Pessoas na fila:
-      <strong style="font-size: 1.5rem; color: black;">{{ qtdEspera }}</strong>
+      <strong>{{ qtdEspera }}</strong>
     </p>
   </div>
 
