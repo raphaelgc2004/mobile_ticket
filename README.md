@@ -26,3 +26,11 @@ O sistema organiza atendimentos do tipo **SP (Prioritário)**, **SE (Exames)** e
     "SE": n,
     "SG": n
   }
+
+
+##  Equipe
+
+- **Maria Carolina Bezerra Melo** – 01837312  
+- **Raphael Guedes Corrêa** – 01746290  
+- **Alex Campos Ferreira** – 01690931  
+- **Aquiles de Melo Albuquerque** – 01725424  
