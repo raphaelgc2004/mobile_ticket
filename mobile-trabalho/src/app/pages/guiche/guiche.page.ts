@@ -1,9 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule, AlertController } from '@ionic/angular';
 
-// IMPORT AJUSTADO (Lê do arquivo ticket.ts)
 import { TicketService, Ticket } from '../../services/ticket';
 
 @Component({
@@ -13,43 +12,46 @@ import { TicketService, Ticket } from '../../services/ticket';
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule]
 })
-export class GuichePage {
+export class GuichePage implements OnInit {
 
-  // Guarda a senha que está na tela agora
-  senhaAtual: Ticket | null = null;
-  
-  // Mostra quantas pessoas tem na fila
-  qtdEspera = 0;
+  public senhaAtual?: Ticket;
+  public qtdEspera = 0;
+
+  // Identificador do guichê — ajuste se quiser (p.ex. 'G1', 'Guichê 2')
+  public guicheId: string = 'G1';
 
   constructor(
-    public ticketService: TicketService, 
+    public ticketService: TicketService,
     private alertController: AlertController
-  ) { }
+  ) {}
 
-  // Toda vez que você entrar na aba, atualiza o contador
-  ionViewWillEnter() {
+  ngOnInit(): void {
     this.atualizarStatus();
   }
 
-  chamarProximo() {
-    // 1. Pede a próxima senha para o serviço
+  // Chamado pelo botão no HTML
+  async chamarProximo() {
+    // Pega próximo da fila
     const ticket = this.ticketService.chamarProximo();
 
-    if (ticket) {
-      // 2. Se veio alguém, mostra na tela
-      this.senhaAtual = ticket;
-      
-      // Se a pessoa desistiu (5% de chance), avisa
-      if (ticket.status === 'desistiu') {
-        this.presentAlert('Aviso', `A senha ${ticket.id} desistiu/foi embora.`);
-      }
-    } else {
-      // 3. Se não veio ninguém, avisa que está vazio
-      this.presentAlert('Fila Vazia', 'Não há senhas aguardando.');
+    if (!ticket) {
+      // Nenhuma senha disponível
+      await this.presentAlert('Sem senhas', 'Não há senhas na fila no momento.');
+      return;
     }
+
     
-    // Atualiza o contador de espera
+    ticket.guiche = this.guicheId;
+    if (!ticket.dataAtendimento) ticket.dataAtendimento = new Date();
+
+    // Atribui a senha atual para mostrar na tela
+    this.senhaAtual = ticket;
+
+    // Atualiza quantidade de espera visível
     this.atualizarStatus();
+
+    // Mostra um alerta resumido
+    await this.presentAlert('Chamando', `Senha: ${ticket.id}\nTipo: ${ticket.tipo}\nGuichê: ${this.guicheId}`);
   }
 
   atualizarStatus() {
