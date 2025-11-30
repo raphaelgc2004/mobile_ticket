@@ -1,34 +1,29 @@
-/* --- 1. Fundo Branco e Texto Escuro --- */
+
 ion-content {
   --background: #ffffff;
-  --color: #333333; /* Cor do texto padrão (parágrafos, h1) */
+  --color: #333333; 
 }
 
 ion-toolbar {
   --background: #FFF59D;
-  --border-color: transparent; /* Remove linha cinza se houver */
+  --border-color: transparent;
 }
 
-/* --- 2. Título Saint Luke Lab (Fonte Serifada e Grande) --- */
+
 ion-title {
-  font-family: 'Georgia', 'Times New Roman', serif; /* Fonte com serifa */
-  font-size: 1.8rem; /* Aumenta o tamanho */
-  color: #2c2c2c;    /* Cinza escuro elegante */
+  font-family: 'Georgia', 'Times New Roman', serif; 
+  font-size: 1.8rem; 
+  color: #2c2c2c;    
   text-align: center;
   font-weight: bold;
   padding-top: 10px;
 }
 
-/* --- 3. Alinhamento Central dos Botões --- */
-/* Como não podemos mexer no HTML para agrupar, vamos forçar o botão a se comportar como bloco centralizado */
-/* --- ESTILO GERAL DOS BOTÕES (Tamanho e Forma) --- */
 ion-button {
   display: block;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 20px;
-  
-  /* Tamanho Grande */
   width: 96%;
   height: 55px;
   font-size: 1.1rem;
@@ -38,28 +33,22 @@ ion-button {
   --box-shadow: 0 4px 6px rgba(0,0,0,0.15);
 }
 
-/* --- CORES ESPECÍFICAS (Aqui devolvemos as cores perdidas) --- */
-
-/* 1º Botão: Prioritário (Laranja/Vermelho) */
 ion-button:nth-of-type(1) {
   --background: linear-gradient(90deg, #ff9966 0%, #ff5e62 100%);
-  --color: #ffffff; /* Letra Branca */
-  margin-top: 60px; /* Empurrar para baixo */
+  --color: #ffffff; 
+  margin-top: 60px; 
 }
 
-/* 2º Botão: Exames (Roxo) */
 ion-button:nth-of-type(2) {
   --background: #b39ddb;
-  --color: #ffffff; /* Letra Branca */
+  --color: #ffffff; 
 }
 
-/* 3º Botão: Geral (Verde) */
 ion-button:nth-of-type(3) {
   --background: #81c784;
-  --color: #ffffff; /* Letra Branca */
+  --color: #ffffff; 
 }
 
-/* Estilizar o H1 e o P para garantir contraste no fundo branco */
 h1 {
   color: #000000;
   margin-top: 30px;
