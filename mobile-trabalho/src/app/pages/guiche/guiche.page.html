@@ -10,13 +10,13 @@
     <ion-card-header>
       <ion-card-subtitle>EM ATENDIMENTO</ion-card-subtitle>
     </ion-card-header>
-    
+
     <ion-card-content>
       <h1 style="font-size: 3.5rem; font-weight: bold; color: var(--ion-color-dark)">
         {{ senhaAtual?.id || '---' }}
       </h1>
 
-      <ion-badge *ngIf="senhaAtual" 
+      <ion-badge *ngIf="senhaAtual"
                  [color]="senhaAtual?.tipo === 'SP' ? 'danger' : 'primary'"
                  style="font-size: 1.2rem; padding: 10px;">
         {{ senhaAtual?.tipo === 'SP' ? 'PRIORIDADE' : 'NORMAL' }}
@@ -33,7 +33,7 @@
 
   <div class="ion-text-center ion-margin-top" style="color: gray;">
     <p>
-      Pessoas na fila: 
+      Pessoas na fila:
       <strong style="font-size: 1.5rem; color: black;">{{ qtdEspera }}</strong>
     </p>
   </div>
