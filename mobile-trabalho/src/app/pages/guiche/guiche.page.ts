@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule, AlertController } from '@ionic/angular';
-
 import { TicketService, Ticket } from '../../services/ticket';
 
 @Component({
@@ -14,11 +13,10 @@ import { TicketService, Ticket } from '../../services/ticket';
 })
 export class GuichePage implements OnInit {
 
-  public senhaAtual?: Ticket;
+  public senhaAtual?: Ticket | null = null;
   public qtdEspera = 0;
-
-  // Identificador do guichê — ajuste se quiser (p.ex. 'G1', 'Guichê 2')
   public guicheId: string = 'G1';
+  public dataAtual = new Date(); // Para mostrar no relatório
 
   constructor(
     public ticketService: TicketService,
@@ -29,34 +27,65 @@ export class GuichePage implements OnInit {
     this.atualizarStatus();
   }
 
-  // Chamado pelo botão no HTML
+  // --- CHAMAR PRÓXIMO ---
   async chamarProximo() {
-    // Pega próximo da fila
     const ticket = this.ticketService.chamarProximo();
 
     if (!ticket) {
-      // Nenhuma senha disponível
       await this.presentAlert('Sem senhas', 'Não há senhas na fila no momento.');
       return;
     }
 
-    
     ticket.guiche = this.guicheId;
     if (!ticket.dataAtendimento) ticket.dataAtendimento = new Date();
 
-    // Atribui a senha atual para mostrar na tela
     this.senhaAtual = ticket;
-
-    // Atualiza quantidade de espera visível
     this.atualizarStatus();
-
-    // Mostra um alerta resumido
-    await this.presentAlert('Chamando', `Senha: ${ticket.id}\nTipo: ${ticket.tipo}\nGuichê: ${this.guicheId}`);
   }
 
   atualizarStatus() {
     const filas = this.ticketService.getTamanhoFilas();
     this.qtdEspera = filas.total;
+  }
+
+ 
+  imprimirRelatorio() {
+    const historico = this.ticketService.historicoGeral || [];
+
+    if (historico.length === 0) {
+      this.presentAlert('Vazio', 'Não há atendimentos para gerar relatório.');
+      return;
+    }
+
+    this.dataAtual = new Date();
+
+    setTimeout(() => {
+      window.print();
+    }, 100);
+  }
+
+ 
+  async encerrarExpediente() {
+    const alert = await this.alertController.create({
+      header: 'Encerrar Expediente?',
+      message: 'Isso vai imprimir o relatório e limpar o sistema. Confirmar?',
+      buttons: [
+        { text: 'Cancelar', role: 'cancel' },
+        {
+          text: 'Encerrar',
+          handler: () => {
+            this.imprimirRelatorio();
+            
+            setTimeout(() => {
+              this.ticketService.clearAll();
+              this.senhaAtual = null;
+              this.atualizarStatus();
+            }, 1000);
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
 
   async presentAlert(titulo: string, mensagem: string) {
